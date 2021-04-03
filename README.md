@@ -1,4 +1,4 @@
-# PetFoodWeb
+# Pet Food Tracker (Web App)
 Announcing an easy way to track your pet's health!
 
 ### Abstract:
