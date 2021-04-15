@@ -1,7 +1,7 @@
 <html>
     <head>
         <link rel="icon" href="assets/favicon.png">
-	    <title>GM Helper</title>
+	    <title>Pet Food Tracker</title>
 
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -19,27 +19,73 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
     </head>
     <body class="container-fluid">
-        <div class="col">
-            <h1 id="house-name-box">
+        <div class="row text-center">
+            <h1>Pet Food Tracker (Web Edition)</h1>
+            <p>Some subtitle maybe?</p>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <h1 class="row" id="home-name-box">
+                    Test Household Name.\/?-_=+!@#$%^&*();:'"`~
+                </h1>
+                <hr>
+                <p class="row">Pets currently tracked:</p>
+                <ul id="pet-list" class="h-100" style="border: 1px solid black;"></ul>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <!-- Create New Pet-->
+                        <form id="create-pet-form">
+                            <label for="petName">Name:</label>
+                            <input id="petName" type="text" class="form-control" placeholder="Enter your pets name here..." aria-label="Enter your pets name here">
+                            <label for="petWeight">Weight:</label>
+                            <input id="petWeight" type="text" class="form-control" placeholder="Enter your pets weight here..." aria-label="Enter your pets weight here">
+                            <label for="petBreed">Breed:</label>
+                            <input id="petBreed" type="text" class="form-control" placeholder="Enter your pets breed here..." aria-label="Enter your pets breed here">
+                            <label for="petName">Birthdate:</label>
+                            <input id="petBirth" type="text" class="form-control" placeholder="Enter your pets birthdate here..." aria-label="Enter your pets birthdate here">
+                            <button type="button">Add New Pet</button>
+                        </form>
+                        <!-- Add Food Item to pet-->
+                        <form id="add-pet-form">
+                            <div class="form-group">
+                                <label for="foodBrand">Food/Treat Brand:</label>
+                                <select class="form-control" id="foodBrand">
+                                    <option>Iams</option>
+                                    <option>Purina</option>
+                                    <option>Blue Buffalo</option>
+                                    <option>Meow Mix</option>
+                                    <option>Science Diet</option>
+                                </select>
+                            </div>
+                        </form>
+                        <form id="add-food-form">
+                            <div class="form-group">
+                                <label for="foodType">Type of item:</label>
+                                <select class="form-control" id="foodType">
+                                    <option>Food</option>
+                                    <option>Treat</option>
+                                    <option>Suppliment</option>
+                                </select>
+                                <lable for="foodAmount">Starting Mass/Weight:</lable>
+                                <input id="foodAmount" type="text" class="form-control" placeholder="Starting weight/mass of item..." aria-label="Starting weight/mass of item">
+                            </div>
+                            <button type="button">Add New Food Item</button>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <h4>Food items for selected brand:</h4>
+                        <ul class="list-group col h-100" style="border: 1px solid black;"></ul>
+                    </div>
+                </div>
+                <!-- Detailed pet info-->
+                <div id="pet-details">
 
-            </h1>
-            <div id="pet-list">
-
+                </div>
             </div>
         </div>
-        <div class="col">
-            <!-- Create New Pet-->
-            <div id="create-pet-form">
-
-            </div>
-            <!-- Add Food Item to pet-->
-            <div id="add-food-form">
-
-            </div>
-            <!-- Detailed pet info-->
-            <div id="pet-details">
-
-            </div>
-        </div>
+        <script src="scripts/bootstrap/bootstrap.bundle.min.js"></script>
     </body>
 </html>
