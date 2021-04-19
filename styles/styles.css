@@ -1,6 +1,6 @@
 .main-body
 {
-    background-color: darkolivegreen;
+    background-color: darkslategray;
     color: bisque;
 }
 
@@ -18,4 +18,9 @@
     border: 1px solid black;
     height: 600px;
     margin: 5px;
+}
+
+.modal-content
+{
+    background-color: lightgray;
 }

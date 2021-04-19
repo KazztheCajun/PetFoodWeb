@@ -45,27 +45,27 @@
         <!-- Add New Pet Modal-->
         <div id="new-pet-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="new-pet-title" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content text-dark">
-                    <div class="modal-header">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-light">
                         <h5 class="modal-title" id="new-pet-title">New Pet:</h5>
                         <button type="button" onclick="closeModal('new-pet-modal')" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body text-dark">
                         <!-- Create Pet Form-->
                         <form id="create-pet-form">
                             <label for="petName">Name:</label>
-                            <input id="petName" type="text" class="form-control" placeholder="Enter your pet's name here..." aria-label="Enter your pets name here">
+                            <input id="petName" type="text" class="form-control m-1" placeholder="Enter your pet's name here..." aria-label="Enter your pets name here">
                             <label for="petWeight">Weight:</label>
-                            <input id="petWeight" type="text" class="form-control" placeholder="Enter your pet's weight here..." aria-label="Enter your pets weight here">
+                            <input id="petWeight" type="text" class="form-control m-1" placeholder="Enter your pet's weight here..." aria-label="Enter your pets weight here">
                             <label for="petBreed">Breed:</label>
-                            <input id="petBreed" type="text" class="form-control" placeholder="Enter your pet's breed here..." aria-label="Enter your pets breed here">
+                            <input id="petBreed" type="text" class="form-control m-1" placeholder="Enter your pet's breed here..." aria-label="Enter your pets breed here">
                             <label for="petName">Birthdate:</label>
-                            <input id="petBirth" type="text" class="form-control" placeholder="Enter your pet's birthdate here..." aria-label="Enter your pets birthdate here">
+                            <input id="petBirth" type="text" class="form-control m-1" placeholder="Enter your pet's birthdate here..." aria-label="Enter your pets birthdate here">
                         </form>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer bg-dark">
                         <button type="button" class="btn btn-primary">Add new pet to home!</button>
                         <button type="button" class="btn btn-secondary" onclick="closeModal('new-pet-modal')" aria-label="Close">Close</button>
                     </div>
@@ -75,83 +75,100 @@
         <!-- Add New Item Event Modal-->
         <div id="new-event-modal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
-                <div class="modal-content text-dark">
-                    <div class="modal-header">
-                        <h5 class="modal-title">New Meal or Treat:</h5>
+                <div class="modal-content">
+                    <div class="modal-header bg-dark text-light">
+                        <h5 class="modal-title">New Meal(s)/Treat(s):</h5>
                         <button type="button" onclick="closeModal('new-event-modal')" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body text-dark">
                         <!-- Add Food Item to pet-->
-                        <form id="add-pet-form">
+                        <form>
                             <div class="form-group">
-                                <label for="foodBrand">Food/Treat Brand:</label>
                                 <select class="form-control" id="foodBrand">
+                                    <option>Food/Treat Brand</option>
                                     <option>Iams</option>
                                     <option>Purina</option>
                                     <option>Blue Buffalo</option>
                                     <option>Meow Mix</option>
                                     <option>Science Diet</option>
                                 </select>
-                            </div>
-                        </form>
-                        <form id="add-food-form">
-                            <div class="form-group">
-                                <label for="foodType">Type of item:</label>
                                 <select class="form-control" id="foodType">
-                                    <option>Food</option>
-                                    <option>Treat</option>
-                                    <option>Suppliment</option>
+                                    <option>Food/Treat Name</option>
+                                    <option>Wet Food 1</option>
+                                    <option>Wet Food 2</option>
+                                    <option>Wet Food 3</option>
+                                    <option>Dry Food 1</option>
+                                    <option>Dry Food 2</option>
+                                    <option>Dry Food 3</option>
+                                    <option>Suppliment 1</option>
+                                    <option>Suppliment 2</option>
+                                    <option>Suppliment 3</option>
                                 </select>
-                                <lable for="foodAmount">Starting Mass/Weight:</lable>
-                                <input id="foodAmount" type="text" class="form-control" placeholder="Starting weight/mass of item..." aria-label="Starting weight/mass of item">
+                                <div class="input-group">
+                                    <input id="itemMass" type="text" class="form-control" placeholder="Starting weight/mass of item..." aria-label="Starting weight/mass of item">
+                                    <input id="itemAmount" type="text" class="form-control" placeholder="g/cups/# of treats/food" aria-label="g/cups/# of treats/food">
+                                </div>
+                                <div class="form-group">
+                                    <label class="m-1" for="petSelection">Which pets did you give this to:</label>
+                                    <div multiple class="form-control" id="petSelection">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="petCheck1">
+                                            <label class="form-check-label" for="petCheck1">Pet 1</label>
+                                        </div>                                          
+                                    </div>
+                                    <div multiple class="form-control" id="petSelection">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="petCheck2">
+                                            <label class="form-check-label" for="petCheck2">Pet 2</label>
+                                        </div>                                          
+                                    </div>
+                                </div>
                             </div>
-                            <button type="button">Add New Food Item</button>
                         </form>
+                        <button class="btn btn-primary">Add Another Meal/Treat</button>
                     </div>
-                    <div class="col">
-                        <h4>Food items for selected brand:</h4>
-                        <ul class="list-group col h-100" style="border: 1px solid black;"></ul>
+                    <div class="modal-footer bg-dark">
+                        <button type="button" class="btn btn-primary">Add event(s) to log</button>
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('new-event-modal')" aria-label="Close">Close</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Add event to log</button>
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('new-event-modal')" aria-label="Close">Close</button>
                 </div>
             </div>
         </div>
         <div class="modal-backdrop fade show" id="backdrop" style="display: none;"></div>
 
         <!-- Main Page content-->
-        <div class="row text-center">
+        <div class="row text-center bg-dark p-3">
             <h1>Pet Food Tracker (Web Edition)</h1>
         </div>
-        <hr>
-        <div class="row">
+        <div class="row mx-5">
             <div class="col-8">
-                <div class="row h1 justify-content-center" id="home-name-box">
+                <div class="row h1 justify-content-center text-uppercase" id="home-name-box">
                     Test Household Name.\/?-_=+!@#$%^&*();:'"`~
                 </div>
                 <hr>
-                <p>Pets currently tracked:</p>
-                <ul id="pet-list" class="list-group pet-list"></ul>
+                <ul id="pet-list" class="list-group pet-list">
+                    <lh class="h4 text-dark">No pets tracked yet...</lh>
+                </ul>
             </div>
             <div class="col">
                 <div class="row">
                     <div class="btn-group-vertical d-block col-3" role="group">
-                        <!-- Create New Pet-->
                         <button type="button" class="btn btn-secondary" onclick="openNewPetModal()">Add new pet</button>
-                        <!-- Add Food Item to pet-->
                         <button type="button" class="btn btn-secondary" onclick="openNewEventModal()">Add new event</button>
                     </div>
+                    <div class="btn-group-vertical d-block col-3" role="group">
+                        <button type="button" class="btn btn-secondary">Create New Home</button>
+                        <button type="button" class="btn btn-secondary">Load Home</button>
+                    </div>
                 </div>
+                <hr>
                 <!-- Detailed pet info-->
-                <div id="pet-details-box" class="pet-details"></div>
+                <div id="pet-details-box" class="pet-details">
+                    <div class="h4 text-dark">Select a pet to see detailed information here...</div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <h1>Hmmmmmmmmmmmmmmmmmmmmmmmmmmmm</h1>
         </div>
         <script src="scripts/bootstrap/bootstrap.bundle.min.js"></script>
     </body>
