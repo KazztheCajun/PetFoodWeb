@@ -1,0 +1,21 @@
+.main-body
+{
+    background-color: darkolivegreen;
+    color: bisque;
+}
+
+.pet-list
+{
+    background-color: bisque;
+    border: 1px solid black;
+    height: 600px;
+    margin: 5px;
+}
+
+.pet-details
+{
+    background-color: bisque;
+    border: 1px solid black;
+    height: 600px;
+    margin: 5px;
+}
