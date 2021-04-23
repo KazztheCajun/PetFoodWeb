@@ -6,10 +6,8 @@
 
 .pet-list
 {
-    background-color: bisque;
-    border: 1px solid black;
-    height: 600px;
     margin: 5px;
+    overflow: visible;
 }
 
 .pet-details
@@ -22,5 +20,11 @@
 
 .modal-content
 {
-    background-color: lightgray;
+    background-color: darkslategray;
+}
+
+.pet-image-box
+{
+    width: 200px;
+    height: 200px;
 }
