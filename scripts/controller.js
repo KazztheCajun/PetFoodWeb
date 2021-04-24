@@ -3,7 +3,7 @@
 export const newHomeButton = document.getElementById("new-home-button");
 export const newPetButton = document.getElementById("new-pet-button");
 export const loadHomeButton = document.getElementById("load-home-button");
-export const newEventButton = document.getElementById("new-event-button");
+export const newEventButton = document.getElementById("new-event-button"); 
 
 
 
@@ -23,8 +23,7 @@ export const getNewEventInfo = function()
     let n = document.getElementById("foodName").value;
     let m = document.getElementById("itemMass").value;
     let t = document.getElementById("itemUnit").value;
-    let c = document.getElementById("pet-select-box").children
-    console.log(c);
+    let c = document.getElementById("pet-select-box").children;
     let checked = [];
     for(let x = 1; x <= c.length; x++)
     {
@@ -35,8 +34,9 @@ export const getNewEventInfo = function()
             checked.push(petName.innerHTML);
         }
     }
-
-    return {"brand": b, "title": n, "mass": m, "unit": t, "pets-fed": checked}
+    let date = new Date();
+    let d = {"day": date.getDay(), "month": date.getMonth(), "year": date.getFullYear(), "hours": date.getHours(), "minutes": date.getMinutes(), "seconds": date.getSeconds()};
+    return {"brand": b, "title": n, "mass": m, "unit": t, "pets-fed": checked, "date": d};
 }
 
 

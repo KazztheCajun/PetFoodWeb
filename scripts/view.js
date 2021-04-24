@@ -1,8 +1,15 @@
-const petList         = document.getElementById("pet-list");
-const petSpecList     = document.getElementById("pet-details-box");
-const homeList        = document.getElementById("home-list");
-const currentHomeName = document.getElementById("home-name-box");
-const petSelectBox    = document.getElementById("pet-select-box");
+export const petList = document.getElementById("pet-list");
+export const petSelectBox     = document.getElementById("pet-select-box");
+export const homeList        = document.getElementById("home-list");
+export const currentHomeName = document.getElementById("home-name-box");
+export const selectedPetBox    = document.getElementById("selected-pet-box");
+export const selectedPetName   = document.getElementById("selected-pet-name");
+export const selectedPetEventDays = document.getElementById("selected-pet-event-days");
+export const selectedPetEventList = document.getElementById("selected-pet-event-list");
+export const selectedPetCals = document.getElementById("selected-pet-avg-cals");
+export const selectedPetNut = document.getElementById("selected-pet-nut-info");
+
+
 
 // function to initialize the page
 export const initializePage = function(state)
@@ -47,37 +54,85 @@ export const update = function(state)
     currentHomeName.innerHTML = `<lh class="h1 text-center">${state.current.home}</lh>`;
     if(Object.entries(state.current.pets).length <= 0)
     {
-        petList.innerHTML = `<lh class="h4">No pets tracked in this home yet...</lh>`;
+        petList.innerHTML = `<div class="h4">No pets tracked in this home yet...</div>`;
     }
     else
     {
         state.current.pets.forEach((p) =>
         {
-            let now = new Date();
-            petList.innerHTML += `<div class="list-group-item bg-dark" aria-current="true">
+            petList.innerHTML += `<button class="list-group-item bg-dark" aria-current="true">
                                     <div class="row w-100">
-                                        <div class="col-2">
+                                        <div class="col">
                                             <img src="https://via.placeholder.com/200" class="rounded float-start pet-list-image">
-                                        </div>
-                                        <div class="col my-auto">
-                                            <h4 id="pet-list-name">${p.name}</h4>
-                                            <h6 id="pet-list-a&w">Born: ${p.birth}    Weight: ${p.weight}</h6>
-                                            <p id="pet-list-breed">Breed: ${p.breed}</p>
+                                            <div class="text-light d-flex flex-column">
+                                                <h3 id="pet-list-name">${p.name}</h3>
+                                                <h6 id="pet-list-a&w">Born: ${p.birth}    Weight: ${p.weight}</h6>
+                                                <p id="pet-list-breed">Breed: ${p.breed}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>`;
+                                </button>`;
         });
     }
     updateHomeList(state.homes);
     updatePetSelectList(state.current);
-    console.log(state.current);
 }
 
-const clearPage = function()
+export const updateSelectedPet = function(state)
 {
-    currentHomeName.innerHTML = `<lh class="h1 text-center">No home loaded yet...</lh>`;
+    selectedPetBox.style.display = "flex";
+    selectedPetName.innerHTML = `${state.selected}`;
+    updateSelectedPetDayList(state);
+    let total = 0;
+    let number = 0;
+    // calculate detailed caloric & nutritional information
+}
+
+export const updateSelectedPetDayList = function(state)
+{
+    if (typeof state.selected != 'undefined');
+    {
+        let set = new Set();
+        state.current.log.forEach((e =>
+        {
+            
+            if(e["pets-fed"].includes(state.selected))
+            {
+                let day = `${e.date.month}/${e.date.day}/${e.date.year}`;
+                set.add(day);
+            }
+        }));
+    //    console.log(set);
+        selectedPetEventDays.innerHTML = `<option>Select a day to see events...</option>`;
+        selectedPetEventList.innerHTML = "";
+        set.forEach(d =>
+        {
+            selectedPetEventDays.innerHTML += `<option>${d}</option>`;
+        });
+    }
+    
+}
+
+export const updateSelectedPetEventList = function(state)
+{
+    let day = selectedPetEventDays.value;
+    selectedPetEventList.innerHTML = "";
+    state.current.log.forEach(e =>
+    {
+        let temp = `${e.date.month}/${e.date.day}/${e.date.year}`;
+        if(day != "Select a day to see events..." && temp == day && e["pets-fed"].includes(state.selected))
+        {
+            selectedPetEventList.innerHTML += `<div class="list-group-item text-center">${e.brand} ${e.title} | ${e.mass} ${e.unit} | ${e.date.hours}:${e.date.minutes}:${e.date.seconds}</div>`
+        }
+        // calculate caloric and nutritional info once items are setup
+    });
+}
+
+export const clearPage = function()
+{
+    currentHomeName.innerHTML = `<div class="h1 text-center">No home loaded yet...</div>`;
     petList.innerHTML = ``;
-    petSpecList.innerHTML = `<div class="h4 text-dark">Select a pet to see detailed information here...</div>`;
+    petSelectBox.innerHTML = ``;
     homeList.innerHTML = "<option selected>Select a home to load...</option>";
-    petSelectBox.innerHTML = "";
+    selectedPetBox.style.display = "none";
 }

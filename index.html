@@ -115,7 +115,7 @@
                                         <option selected>Select units</option>
                                         <option>g (by mass)</option>
                                         <option>cups (by volume)</option>
-                                        <option># of treats given</option>
+                                        <option>treats given</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -138,14 +138,14 @@
         <div class="row text-center bg-dark p-3">
             <h1>Pet Food Tracker (Web Edition)</h1>
         </div>
-        <div class="row mx-5">
+        <div class="row">
             <div class="col-8">
                 <div class="row h1 justify-content-center text-uppercase" id="home-name-box">
                     Test Household Name.\/?-_=+!@#$%^&*();:'"`~
                 </div>
                 <hr>
                 <div id="pet-list" class="row list-group pet-list">
-                    
+
                 </div>
             </div>
             <div class="col">
@@ -167,7 +167,21 @@
                 </div>
                 <hr>
                 <!-- Detailed pet info-->
-                <div id="pet-details-box" class="pet-details"></div>
+                <div class="row m-2 bg-dark">
+                    <div id="selected-pet-box" class="pet-details list-group">
+                        <div id="selected-pet-name" class="mx-auto h1">Test pet name</div>
+                        <select id="selected-pet-event-days" class="form-select list-group-item">
+                            <option>Select a day to see events...</option>
+                        </select>
+                        <div class="text-dark selected-pet-event-list list-group-item">
+                            <h6>Events for a selected day:</h6>
+                            <div id="selected-pet-event-list" class="text-dark list-group"></div>
+                        </div>
+                        <div id="selected-pet-avg-cals" class="bg-dark list-group-item">Average Calories per day</div>
+                        <hr class="m-1">
+                        <div id="selected-pet-nut-info" class="bg-dark list-group-item">More specific nutritional information</div>
+                    </div>
+                </div>
             </div>
         </div>
         <script src="scripts/bootstrap/bootstrap.bundle.min.js"></script>

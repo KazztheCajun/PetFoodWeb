@@ -12,10 +12,8 @@
 
 .pet-details
 {
-    background-color: bisque;
-    border: 1px solid black;
-    height: 600px;
     margin: 5px;
+    display: none;
 }
 
 .modal-content
@@ -27,4 +25,12 @@
 {
     width: 200px;
     height: 200px;
+}
+
+.selected-pet-event-list
+{
+    height: 400px;
+    background-color: bisque;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
