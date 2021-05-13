@@ -11,6 +11,4 @@ A few years ago, one of my cats was diagnosed with advanced Feline Hepatic Lipid
 * Nutritional information of popular pet food and treat brands
 * Export your pet’s information to easily share with your vet
 
-### More documentation can be found here: https://github.com/KazztheCajun/PetFoodWeb/wiki
-
-### You can find it here: http://www.cajunkalamity.com/PetFoodWeb/
+# You can find it here: http://www.cajunkalamity.com/PetFoodWeb/

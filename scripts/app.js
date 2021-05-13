@@ -1,30 +1,54 @@
 import * as http from "./http.js";
 import * as view from "./view.js";
 import * as controller from "./controller.js";
-const API_KEY = "$2b$10$kTV7Q2uzktXPthN9WDakYeAxmR.14E41CHUxjeRRSODrXtjjd1pfm"; // Key needed to create new bins in the collection
-const COL_ID = "6084a3c3f6655022c46b0330"; // ID to associate bin with my Pet Food App collection
-const HOME_PATH = "https://api.jsonbin.io/v3/b"; // generic path to access home bins
-const SAVED_PATH = "https://api.jsonbin.io/v3/b/607f68f0027da70c476d4eb2"; // Tracks currently created homes
 const state = 
 {
     selected: undefined, // holds a reference to the currently selected pet
     homes: {},  // map of all houses tracked by the app
-    current: undefined // holds the currently loaded home
+    current: undefined, // holds the currently loaded home
+    user: undefined // holds the currently logged in user info
 };
 
 const newHomeName = document.getElementById("new-home-name");
 const loadHomeName = document.getElementById("home-list");
+const loginName = document.getElementById("login-name");
+const loginPass = document.getElementById("user-pass");
 
 // initialize the window and setup the app
 const start = async () =>
 {
-    state.homes = await http.loadHouseList(SAVED_PATH);
+    state.homes = await http.loadHouseList();
     console.log(state.homes);
     view.initializePage(state);
 }
 
+// create new user
+const newUser = async() =>
+{
+    let user = controller.getNewUserInfo();
+//    console.log(user);
+    if (user.name != "" && user.pass != "")
+    {
+        let r = await http.saveUserToDB(user);
+        alert(`${r.message}`);
+    }
+};
+
+const loadUser = async() =>
+{
+    let res = await http.signIntoUser(loginName.value, loginPass.value);
+    loginName.value = "";
+    loginPass.value = "";
+//    console.log(res);
+    state.user = res.user;
+    let r = await http.loadHouseList(state.user.homes);
+    state.homes = r.homes;
+    console.log(state.homes);
+    view.update(state);
+}
+
 // create a new home
-const createHome = function()
+const createHome = async () =>
 {
     let temp = newHomeName.value;
     if (temp != "")
@@ -40,7 +64,20 @@ const createHome = function()
         });
         if (!dup)
         {
-            http.createHomeDB(temp, HOME_PATH, COL_ID, API_KEY, SAVED_PATH, state.homes);
+            const r = await http.createHomeDB(temp);
+            if (!r.success)
+            {
+                alert(`${r.message}`);
+                return
+            }
+            state.user.homes.push(r.home._id);
+            state.current = r.home;
+            console.log(state.user.homes);
+            await http.updateUserInDB(state.user);
+            let res = await http.loadHouseList(state.user.homes);
+            state.homes = res.homes
+            view.update(state);
+            alert(`${r.home.home} was saved`);
         }
         
     }
@@ -55,17 +92,17 @@ const createHome = function()
 const loadHome = async () =>
 {
     let name = loadHomeName.value;
-    let home = {};
+    let id = 0;
     if (name != "" && name != "Select a home to load...")
     {
         state.homes.forEach((x) =>
         {
             if (x.home == name)
             {
-                home = x;
+                id = x._id;
             }
         });
-        state.current = await http.loadHomeDB(home.ID, HOME_PATH);
+        state.current = await http.loadHomeDB(id);
         view.update(state);
         addPetEventListners();
     }
@@ -82,7 +119,7 @@ const createNewPet = function()
     let pet = controller.getNewPetInfo();
 //    console.log(state.current);
     state.current.pets.push(pet);
-    http.updateHomeDB(JSON.stringify(state.current), state.current.ID, HOME_PATH);
+    http.updateHomeDB(state.current, state.current._id);
     view.update(state);
     addPetEventListners();
 //    console.log(state.current);
@@ -103,7 +140,8 @@ const createNewEvent = function()
 {
     let e = controller.getNewEventInfo();
     state.current.log.push(e);
-    http.updateHomeDB(JSON.stringify(state.current), state.current.ID, HOME_PATH);
+    http.updateHomeDB(state.current, state.current._id);
+    view.update(state);
 //    console.log(state.current);
     alert(`Fed ${e["pets-fed"]} ${e.mass} ${e.unit} of ${e.brand} ${e.title}.`);
 }
@@ -135,7 +173,14 @@ const updateSelectedPetEventsListener = function()
     view.updateSelectedPetEventList(state);
 }
 
+// debug handlers
 
+
+// handler for login events
+controller.loginButton.addEventListener('click', loadUser);
+
+// handler for new user calls
+controller.newUserButton.addEventListener('click', newUser);
 // handler for new Home calls
 controller.newHomeButton.addEventListener('click', createHome);
 // handler for load Home calls
@@ -148,4 +193,4 @@ controller.newEventButton.addEventListener('click', updateSelectedPetLists);
 // handler for new Event list for a selected pet
 view.selectedPetEventDays.addEventListener('change', updateSelectedPetEventsListener);
 // handler for starting the app
-window.addEventListener("load", start);
+//window.addEventListener("load", start);

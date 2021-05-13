@@ -8,6 +8,13 @@ export const selectedPetEventDays = document.getElementById("selected-pet-event-
 export const selectedPetEventList = document.getElementById("selected-pet-event-list");
 export const selectedPetCals = document.getElementById("selected-pet-avg-cals");
 export const selectedPetNut = document.getElementById("selected-pet-nut-info");
+export const mainPage = document.getElementById("main-page");
+export const usernameBox = document.getElementById("username-box");
+export const signupButton = document.getElementById("signup-button");
+
+//debug elements
+export const showPageButton = document.getElementById('show-page');
+
 
 
 
@@ -15,8 +22,9 @@ export const selectedPetNut = document.getElementById("selected-pet-nut-info");
 export const initializePage = function(state)
 {
     clearPage();
+    showMainPage();
     updateHomeList(state.homes);
-    if (typeof state.current != 'undefined')
+    if (typeof state.current != 'undefined' && typeof state.current != "null")
     {
         updatePetSelectList(state.current);
     }
@@ -51,31 +59,44 @@ export const update = function(state)
 {
     console.log(state);
     clearPage(state);
-    currentHomeName.innerHTML = `<lh class="h1 text-center">${state.current.home}</lh>`;
-    if(Object.entries(state.current.pets).length <= 0)
+    showMainPage();
+    if (typeof state.user != 'undefined' && typeof state.user != "null")
     {
-        petList.innerHTML = `<div class="h4">No pets tracked in this home yet...</div>`;
+        usernameBox.innerHTML = `Welcome, ${state.user.name}`;
+        signupButton.style.display = "none";
     }
-    else
+    if (typeof state.current != 'undefined' && typeof state.current != "null")
     {
-        state.current.pets.forEach((p) =>
+        currentHomeName.innerHTML = `<lh class="h1 text-center">${state.current.home}</lh>`;
+    
+        if(Object.entries(state.current.pets).length <= 0)
         {
-            petList.innerHTML += `<button class="list-group-item bg-dark" aria-current="true">
-                                    <div class="row w-100">
-                                        <div class="col">
-                                            <img src="https://via.placeholder.com/200" class="rounded float-start pet-list-image">
-                                            <div class="text-light d-flex flex-column">
-                                                <h3 id="pet-list-name">${p.name}</h3>
-                                                <h6 id="pet-list-a&w">Born: ${p.birth}    Weight: ${p.weight}</h6>
-                                                <p id="pet-list-breed">Breed: ${p.breed}</p>
+            petList.innerHTML = `<div class="h4">No pets tracked in this home yet...</div>`;
+        }
+        else
+        {
+            state.current.pets.forEach((p) =>
+            {
+                petList.innerHTML += `<button class="list-group-item bg-dark" aria-current="true">
+                                        <div class="row w-100">
+                                            <div class="col">
+                                                <img src="https://via.placeholder.com/200" class="rounded float-start pet-list-image">
+                                                <div class="text-light d-flex flex-column">
+                                                    <h3 id="pet-list-name">${p.name}</h3>
+                                                    <h6 id="pet-list-a&w">Born: ${p.birth}    Weight: ${p.weight}</h6>
+                                                    <p id="pet-list-breed">Breed: ${p.breed}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </button>`;
-        });
+                                    </button>`;
+            });
+        }
+        updatePetSelectList(state.current);
+        // technically need to check for a selected, but its pretty impossible to have a selected pet
+        // without a currently loaded home
+        updateSelectedPetEventList(state);
     }
     updateHomeList(state.homes);
-    updatePetSelectList(state.current);
 }
 
 export const updateSelectedPet = function(state)
@@ -128,6 +149,11 @@ export const updateSelectedPetEventList = function(state)
     });
 }
 
+export const showMainPage = function()
+{
+    mainPage.style.display = "flex";
+}
+
 export const clearPage = function()
 {
     currentHomeName.innerHTML = `<div class="h1 text-center">No home loaded yet...</div>`;
@@ -136,3 +162,4 @@ export const clearPage = function()
     homeList.innerHTML = "<option selected>Select a home to load...</option>";
     selectedPetBox.style.display = "none";
 }
+

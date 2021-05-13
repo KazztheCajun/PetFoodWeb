@@ -4,6 +4,11 @@
     color: bisque;
 }
 
+.main-page
+{
+    display: none;
+}
+
 .pet-list
 {
     margin: 5px;

@@ -3,7 +3,9 @@
 export const newHomeButton = document.getElementById("new-home-button");
 export const newPetButton = document.getElementById("new-pet-button");
 export const loadHomeButton = document.getElementById("load-home-button");
-export const newEventButton = document.getElementById("new-event-button"); 
+export const newEventButton = document.getElementById("new-event-button");
+export const newUserButton = document.getElementById("new-user-button");
+export const loginButton = document.getElementById("login-button"); 
 
 
 
@@ -37,6 +39,18 @@ export const getNewEventInfo = function()
     let date = new Date();
     let d = {"day": date.getDay(), "month": date.getMonth(), "year": date.getFullYear(), "hours": date.getHours(), "minutes": date.getMinutes(), "seconds": date.getSeconds()};
     return {"brand": b, "title": n, "mass": m, "unit": t, "pets-fed": checked, "date": d};
+}
+
+export const getNewUserInfo = function()
+{
+    let u = document.getElementById("new-user").value;
+    let p = document.getElementById("new-pass").value;
+    let user = {"name": u, "pass": p, "homes": []}
+
+    document.getElementById("new-user").value = "";
+    document.getElementById("new-pass").value = "";
+
+    return user;
 }
 
 

@@ -18,6 +18,10 @@
         <link rel="stylesheet" href="styles/styles.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
 
+        <!-- Google Icons-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
         <script>
             function openNewPetModal()
             {
@@ -30,6 +34,12 @@
                 document.getElementById("backdrop").style.display = "block";
                 document.getElementById("new-event-modal").style.display = "block";
                 document.getElementById("new-event-modal").className += "show";
+            }
+            function openNewUserModal()
+            {
+                document.getElementById("backdrop").style.display = "block";
+                document.getElementById("new-user-modal").style.display = "block";
+                document.getElementById("new-user-modal").className += "show";
             }
             function closeModal(modalName) 
             {
@@ -44,6 +54,36 @@
     </head>
 
     <body class="main-body">
+
+        <!-- New User Creation Modal-->
+        <div id="new-user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="new-user-title" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-dark">
+                        <h5 class="modal-title" id="new-user-title">Sign up:</h5>
+                        <button type="button" onclick="closeModal('new-user-modal')" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Create User Form-->
+                        <form>
+                            <div>
+                                <label for="home">Username:</label>            
+                                <input type="text" class="form-control m-1" name="user" id="new-user">
+                                <label for="pass">Password:</label>
+                                <input type="pass" class="form-control m-1" name="pass" id="new-pass">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer bg-dark">
+                        <button type="button" id="new-user-button" onclick="closeModal('new-user-modal')" class="btn btn-outline-light">Create new user</button>
+                        <button type="button" class="btn btn-outline-light" onclick="closeModal('new-user-modal')" aria-label="Close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- Add New Pet Modal-->
         <div id="new-pet-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="new-pet-title" aria-hidden="true">
@@ -135,14 +175,30 @@
         <div class="modal-backdrop fade show" id="backdrop" style="display: none;"></div>
 
         <!-- Main Page content-->
-        <div class="row text-center bg-dark p-3">
-            <h1>Pet Food Tracker (Web Edition)</h1>
-        </div>
-        <div class="row">
-            <div class="col-8">
-                <div class="row h1 justify-content-center text-uppercase" id="home-name-box">
-                    Test Household Name.\/?-_=+!@#$%^&*();:'"`~
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="user-header">
+            <div class="container-fluid">
+                <div class="navbar-brand h1" id="username-box">
+                    Please Sign-in to use the service.
                 </div>
+                <button type="button" class="btn btn-outline-light" onclick="openNewUserModal()" id="signup-button">Sign Up if you are new!</button>
+                <div class="d-flex">
+                    <div class="input-group text-dark">
+                        <div class="form-floating">
+                            <input type="text" id="login-name" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="user-label">
+                            <label for="login-name" id="user-label">Username</label> 
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" id="user-pass" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="pass-label">
+                            <label for="user-pass" id="pass-label">Password</label>
+                        </div>
+                    </div>
+                    <button id="login-button" class="btn btn-outline-light">Login</button>
+                </div>
+            </div>
+        </nav>
+        <div class="row main-page" id="main-page">
+            <div class="col-8">
+                <div class="row h1 justify-content-center text-uppercase" id="home-name-box">No home loaded yet...</div>
                 <hr>
                 <div id="pet-list" class="row list-group pet-list">
 
@@ -157,7 +213,7 @@
                     <div class="btn-group-vertical mt-2 d-block col" role="group">
                         <div class="input-group">
                             <input type="text" id="new-home-name" class="form-control" placeholder="Name of new home..." aria-label="Name of new home" aria-describedby="new-home-button">
-                            <button class="btn btn-outline-light" type="button" id="new-home-button"> Create New Home </button>
+                            <button class="btn btn-outline-light" id="new-home-button"> Create New Home </button>
                         </div>
                         <div class="input-group">
                             <select class="form-select" id="home-list" aria-label="Select a home to load"></select>
