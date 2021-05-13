@@ -13,6 +13,7 @@ const newHomeName = document.getElementById("new-home-name");
 const loadHomeName = document.getElementById("home-list");
 const loginName = document.getElementById("login-name");
 const loginPass = document.getElementById("user-pass");
+const userClose = document.getElementById('user-modal-close');
 
 // initialize the window and setup the app
 const start = async () =>
@@ -142,6 +143,7 @@ const createNewEvent = function()
     state.current.log.push(e);
     http.updateHomeDB(state.current, state.current._id);
     view.update(state);
+    addPetEventListners();
 //    console.log(state.current);
     alert(`Fed ${e["pets-fed"]} ${e.mass} ${e.unit} of ${e.brand} ${e.title}.`);
 }
@@ -173,12 +175,22 @@ const updateSelectedPetEventsListener = function()
     view.updateSelectedPetEventList(state);
 }
 
-// debug handlers
-
+// misc button handlers
+function clearSignUp()
+{
+    document.getElementById("new-user").value = "";
+    document.getElementById("new-pass").value = "";
+}
+function clearSignIn()
+{
+    document.getElementById("login-name").value = "";
+    document.getElementById("user-pass").value = "";
+}
+userClose.addEventListener('click', clearSignUp);
 
 // handler for login events
 controller.loginButton.addEventListener('click', loadUser);
-
+controller.loginButton.addEventListener('click', clearSignIn);
 // handler for new user calls
 controller.newUserButton.addEventListener('click', newUser);
 // handler for new Home calls

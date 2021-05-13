@@ -1,6 +1,6 @@
 import * as view from "./view.js"
 
-const API_PATH = "http://localhost:3000/api";
+const API_PATH = "https://obscure-hollows-34262.herokuapp.com/api";
 
 // POSTs a new home into the DB
 export const createHomeDB = async (homeName) =>

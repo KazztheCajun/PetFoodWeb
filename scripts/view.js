@@ -94,7 +94,7 @@ export const update = function(state)
         updatePetSelectList(state.current);
         // technically need to check for a selected, but its pretty impossible to have a selected pet
         // without a currently loaded home
-        updateSelectedPetEventList(state);
+        
     }
     updateHomeList(state.homes);
 }
