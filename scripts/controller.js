@@ -36,7 +36,7 @@ export const getNewEventInfo = function()
             checked.push(petName.innerHTML);
         }
     }
-    let date = new Date();
+    let date = new Date(Date.now());
     let d = {"day": date.getDay(), "month": date.getMonth(), "year": date.getFullYear(), "hours": date.getHours(), "minutes": date.getMinutes(), "seconds": date.getSeconds()};
     return {"brand": b, "title": n, "mass": m, "unit": t, "pets-fed": checked, "date": d};
 }
